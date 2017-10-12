@@ -1,5 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
+
+    <div class="user-options">
+      <% if current_user %>
+        Signed in as <%= current_user.first_name %> | <%= link_to "Logout", '/logout' %>
+      <% else %>
+        <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/users/new' %>
+      <% end %>
+    </div>
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
