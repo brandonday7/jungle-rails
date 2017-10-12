@@ -132,5 +132,45 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+user1 = User.create!(first_name: 'Harry Potter', last_name: 'Potter', email: 'harry_p@magic.com', password: 'abcd')
+user2 = User.create!(first_name: 'Ron', last_name: 'Weasley', email: 'bigron@magic.com', password: '1234')
+user3 = User.create!(first_name: 'Hermione', last_name: 'Granger', email: 'smart@magic.com', password: 'xyz')
+
+
+
+product1 = Product.find(1)
+product2 = Product.find(2)
+product3 = Product.find(3)
+
+
+
+product1.reviews.create!({
+  user_id: 2,
+  description: "It's in pretty good shape!",
+  rating: 4
+})
+product1.reviews.create!({
+  user_id: 3,
+  description: "Terrible!! Never again!",
+  rating: 1
+})
+product2.reviews.create!({
+  user_id: 1,
+  description: "Best one I've ever had!",
+  rating: 5
+})
+product2.reviews.create!({
+  user_id: 1,
+  description: "Bad.",
+  rating: 2
+})
+product3.reviews.create!({
+  user_id: 2,
+  description: "Super ok.",
+  rating: 3
+})
+
+
+
 
 puts "DONE!"

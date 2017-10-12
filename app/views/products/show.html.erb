@@ -23,7 +23,24 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
         </dl>
+        <br><br>
+        <%= form_for @product.reviews, url: {action: "create"} do |f| %>
+          <%= f.text_field :title %>
+          <%= f.text_area :body, size: "60x12" %>
+          <%= f.submit "Create" %>
+        <% end %>
+
+
+        <div class='dl-horizontal'>
+          <h4>Reviews:</h4>
+          <% @product.reviews.each do |review| %>
+           <dt> Rating: <%= review.rating %>/5</dt>
+           <dd> <%= review.description %></dd>
+           <% end %>
+        </div>
       </div>
+
+
     </div>
 
   </article>
