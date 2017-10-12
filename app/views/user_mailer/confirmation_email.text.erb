@@ -1,0 +1,17 @@
+
+Thank you for your recent order, <%= @user.first_name %>
+==========================================================
+
+For future reference, your order number is <%= @order.id %>.
+
+The details of your order can be seen below!
+
+<% @order.line_items.each do |line_item| %>
+  Name: <%= line_item.product.name %>
+  Quantity: <%= line_item.quantity %>
+  Price: $<%= line_item.total_price_cents.to_f/100 %>
+<% end %>
+
+Order Total: $<%= @order.total_cents.to_f/100 %>
+
+Thanks for shopping with us, and have a great day!

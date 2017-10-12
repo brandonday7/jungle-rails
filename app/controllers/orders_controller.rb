@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+ class OrdersController < ApplicationController
 
   before_filter :authorize
 
@@ -11,6 +11,8 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
+      UserMailer.confirmation_email(current_user, order).deliver_later # send mail
+
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
@@ -39,7 +41,7 @@ class OrdersController < ApplicationController
 
   def create_order(stripe_charge)
     order = Order.new(
-      email: params[:stripeEmail],
+      email: current_user.email,
       total_cents: cart_total,
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you for your recent order, <%= @user.first_name %></h1>
+    <p>
+      For future reference, your order number is <%= @order.id %>.<br>
+    </p>
+    <p>
+      The details of your order can be seen below!
+    </p>
+
+    <% @order.line_items.each do |line_item| %>
+      <p> Name: <%= line_item.product.name %> <br>
+        Quantity: <%= line_item.quantity %> <br>
+        Price: $<%= line_item.total_price_cents.to_f/100 %><br></p>
+    <% end %>
+
+    <p>Order Total: $<%= @order.total_cents.to_f/100 %></p>
+
+    <p>Thanks for shopping with us, and have a great day!</p>
+  </body>
+</html>
