@@ -24,10 +24,11 @@
           <dd><%= @product.price %></dd>
         </dl>
         <br><br>
-        <%= form_for @product.reviews, url: {action: "create"} do |f| %>
-          <%= f.text_field :title %>
-          <%= f.text_area :body, size: "60x12" %>
-          <%= f.submit "Create" %>
+
+        <%= form_for :review, :url => "/products/#{@product.id}/reviews" do |f| %>
+          <%= f.select :rating, (1..5) %>
+          <%= f.text_area :description, size: "40x8" %>
+          <%= f.submit "Submit Rating" %>
         <% end %>
 
 
