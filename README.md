@@ -31,4 +31,6 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 ## Screenshots
 
-!["Chatty App in action!"](https://raw.github.com/brandonday7/react-simple-boilerplate/master/docs/chatty.png)
+!["Check out the online catalogue!"](https://raw.github.com/brandonday7/jungle-rails/master/docs/store.png)
+!["Check out each item's details and reviews!"](https://raw.github.com/brandonday7/jungle-rails/master/docs/item.png)
+!["Visit your cart to place an order!"](https://raw.github.com/brandonday7/jungle-rails/master/docs/your-cart.png)
