@@ -25,17 +25,21 @@
         </dl>
         <br><br>
 
-        <%= form_for :review, :url => "/products/#{@product.id}/reviews" do |f| %>
-          <%= f.select :rating, (1..5) %>
-          <%= f.text_area :description, size: "40x8" %>
-          <%= f.submit "Submit Rating" %>
-        <% end %>
+        <div class="form">
+          <%= form_for :review, :url => "/products/#{@product.id}/reviews" do |f| %>
+            <%= f.select :rating, (1..5) %>
+            <%= f.text_area :description, size: "40x8" %>
+            <%= f.submit "Submit Rating" %>
+          <% end %>
+        </div>
 
 
         <div class='dl-horizontal'>
           <h4>Reviews:</h4>
-          <% @product.reviews.each do |review| %>
-           <dt> Rating: <%= review.rating %>/5</dt>
+          <% @reviews.each do |review| %>
+          <% review_username = User.find(review[:user_id])[:first_name] %>
+          <dt> <%= review_username %> says <br></dt>
+           Rating: <%= review.rating %>/5</dt>
            <dd> <%= review.description %></dd>
            <% end %>
         </div>
