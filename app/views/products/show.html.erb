@@ -22,37 +22,48 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dd>
+            <br><br><br>
+            <div class="form">
+              <% if session[:user_id] %>
+                <h4>Submit a review for this product</h4>
+                <%= form_for :review, :url => "/products/#{@product.id}/reviews" do |f| %>
+                  <%= f.text_area :description, size: "50x4", placeholder: "Insert product review here"%>
+                  <br><h6>Your rating of this product:</h6>
+                  <%= f.select :rating, (1..5) %>
+                  <%= f.submit "Submit Rating" %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <h4>Reviews:</h4>
+
+              <% @reviews.each do |review| %>
+              <div class="row review-row">
+                <% review_username = User.find(review[:user_id])[:first_name] %>
+                <div class="col-sm-2"><%= review_username %>: </div>
+                <div class="col-sm-4"> Rating: <%= review.rating %>/5</div>
+                <div class="col-sm-4"> <%= review.description %></div>
+
+                 <!-- check if logged in, and gives authorization to delete if review is yours -->
+                <% logged_in = session[:user_id] %>
+                <% if logged_in && logged_in == review[:user_id] %>
+                <div class="col-sm-2"><%= link_to fa_icon('trash'), "/products/#{@product.id}/reviews/#{review[:id]}", class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></div>
+                <% end %>
+              </div>
+              <% end %>
+
+
+          </dd>
         </dl>
-        <br><br>
 
-        <% if session[:user_id] %>
-          <div class="form">
-            <%= form_for :review, :url => "/products/#{@product.id}/reviews" do |f| %>
-              <%= f.select :rating, (1..5) %>
-              <%= f.text_area :description, size: "40x8" %>
-              <%= f.submit "Submit Rating" %>
-            <% end %>
-          </div>
-        <% end %>
-
-
-        <div class='dl-horizontal'>
-          <h4>Reviews:</h4>
-          <% @reviews.each do |review| %>
-            <% review_username = User.find(review[:user_id])[:first_name] %>
-            <dt> <%= review_username %> says </dt><br>
-             <dt> Rating: <%= review.rating %>/5</dt>
-             <dd> <%= review.description %></dd>
-
-             <!-- check if logged in, and gives authorization to delete if review is yours -->
-             <% logged_in = session[:user_id] %>
-             <% if logged_in && logged_in == review[:user_id] %>
-            <%= link_to fa_icon('trash'), "/products/#{@product.id}/reviews/#{review[:id]}", class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-             <% end %>
-
-           <% end %>
-        </div>
       </div>
+      <br><br>
+
+
+
+
+
 
 
     </div>
