@@ -1,6 +1,7 @@
 # Jungle
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+Register an account and browse this online store. Add things to your cart, read and post reviews, and place an order (using dummy credit card mentioned below) to receive an email with your order review!
 
 
 ## Setup
@@ -26,3 +27,8 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
 * PostgreSQL 9.x
 * Stripe
+
+
+## Screenshots
+
+!["Chatty App in action!"](https://raw.github.com/brandonday7/react-simple-boilerplate/master/docs/chatty.png)
