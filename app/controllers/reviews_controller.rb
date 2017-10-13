@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+
+  before_filter :verify_logged_in
+
   def create
     current_product = Product.find(params[:product_id])
 
@@ -11,5 +14,20 @@ class ReviewsController < ApplicationController
     redirect_to "/products/#{current_product[:id]}"
 
   end
+
+  def destroy
+    current_product = Product.find(params[:product_id])
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_to "/products/#{current_product[:id]}"
+  end
+
+  private
+  def verify_logged_in
+    if !session[:user_id]
+      redirect_to "/products/#{current_product[:id]}"
+    end
+  end
+
 
 end
