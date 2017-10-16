@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    email = user_params[:email].downcase #make sure they input a lowercase email (our emails are not case sensitive)
     user = User.new(user_params)
+    user[:email] = email
     if user.save
       session[:user_id] = user.id
       redirect_to '/'
